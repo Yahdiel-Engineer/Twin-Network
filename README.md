@@ -325,17 +325,3 @@ Les contributions sont les bienvenues ! N'hésitez pas à :
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ---
-
-## 📧 Contact
-
-**Bryan Stanley Koyaweda**  
-📧 stanley.koyaweda@gmail.com  
-🔗 [LinkedIn](https://linkedin.com/in/bryan-stanley-koyaweda)
-
----
-
-## 🙏 Remerciements
-
-- [Containerlab](https://containerlab.dev/) pour l'outil de virtualisation
-- [Arista Networks](https://www.arista.com/) pour l'image cEOS
-- La communauté open-source pour les bibliothèques Python (NAPALM, Netmiko)
