@@ -88,43 +88,8 @@ graph TD
     end
 ```
 
-## 📦 Prérequis et Installation
-
-### Prérequis Système
-
-1. Ubuntu 20.04+, CentOS 8+, ou macOS 11+
-
-2. Docker 20.10+
-
-3. Python 3.8+
-
-4. Git
-
-5. Image cEOS (compte Arista nécessaire)
-
-### Installation
-
-git clone https://github.com/username/network-simulation-containerlab.git
-cd network-simulation-containerlab
-pip3 install -r requirements.txt
-sudo bash -c "$(curl -sL https://get.containerlab.dev)"
-docker import cEOS-lab-4.28.0F.tar.xz ceos:4.28.0F
-
-### Configuration
-
-cp config/config.example.yaml config/config.yaml
-nano config/config.yaml
-
-### 🚀 Utilisation
-
-1. Monitoring
 
 
-from network_scanner import NetworkScanner
 
-scanner = NetworkScanner()
-devices = scanner.discover_devices(
-    network_range="192.168.1.0/24",
-    credentials={"username": "admin", "password": "***"}
-)
-topology_data = scanner.collect_lldp_neighbors(devices)
+
+
