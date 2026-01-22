@@ -134,16 +134,61 @@ Ce projet développé durant un stage permet l'automatisation complète de la si
 ## 🏗️ Architecture
 
 ```mermaid
-graph TB
-A[Switches Physiques] --> B[Scripts de Monitoring]
-B --> C[Base de Données Local]
-C --> D[Générateur de Topologie]
-D --> E[Containerlab YAML]
-E --> F[Environnement Virtuel]
-F --> G[Tests Automatisés]
-G --> H[Rapports & Visualisation]
+graph TD
+    subgraph "Monde Physique"
+    A[Switches Physiques] -->|SNMP/LLDP| B(Script de Découverte Python)
+    end
 
-subgraph "Environnement Docker"
-F --> I[cEOS Containers]
-F --> J[Monitoring Tools]
-end
+    subgraph "Orchestration & Data"
+    B -->|Données Structurées| C{Source of Truth - Netbox}
+    C -->|API/Export| D[Générateur de Topologie]
+    D -->|Jinja2 Templating| E[Fichier Containerlab .yaml]
+    end
+
+    subgraph "Jumeau Numérique"
+    E -->|Déploiement| F[Environnement Virtuel Docker]
+    F -->|Validation| G[Tests Automatisés Ansible/Pytest]
+    G -->|Feedback| H[Dashboard Grafana & Logs]
+    end
+```
+
+## 📦 Prérequis et Installation
+
+### Prérequis Système
+
+1. Ubuntu 20.04+, CentOS 8+, ou macOS 11+
+
+2. Docker 20.10+
+
+3. Python 3.8+
+
+4. Git
+
+5. Image cEOS (compte Arista nécessaire)
+
+### Installation
+
+git clone https://github.com/username/network-simulation-containerlab.git
+cd network-simulation-containerlab
+pip3 install -r requirements.txt
+sudo bash -c "$(curl -sL https://get.containerlab.dev)"
+docker import cEOS-lab-4.28.0F.tar.xz ceos:4.28.0F
+
+### Configuration
+
+cp config/config.example.yaml config/config.yaml
+nano config/config.yaml
+
+### 🚀 Utilisation
+
+1. Monitoring
+
+
+from network_scanner import NetworkScanner
+
+scanner = NetworkScanner()
+devices = scanner.discover_devices(
+    network_range="192.168.1.0/24",
+    credentials={"username": "admin", "password": "***"}
+)
+topology_data = scanner.collect_lldp_neighbors(devices)
