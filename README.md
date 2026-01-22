@@ -1,61 +1,72 @@
-# 🌐 Network Digital Twin & Automation Pipeline
+# 🌐 Simulation Réseau Automatisée avec Containerlab
 
-<div align="center">
+![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-20.10+-blue?logo=docker&logoColor=white)
+![Containerlab](https://img.shields.io/badge/Containerlab-0.40+-orange?logo=container&logoColor=white)
+![Arista](https://img.shields.io/badge/Arista-cEOS-red?logo=cisco&logoColor=white)
+![YAML](https://img.shields.io/badge/Config-YAML-yellow?logo=yaml&logoColor=black)
+![Status](https://img.shields.io/badge/Status-Production-green)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-![Status](https://img.shields.io/badge/Status-Sanitized_Demo-success?style=for-the-badge)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Containerlab](https://img.shields.io/badge/Containerlab-Network_Simulation-green?style=for-the-badge)
-![Ansible](https://img.shields.io/badge/Ansible-Configuration-red?style=for-the-badge&logo=ansible&logoColor=white)
-![Python](https://img.shields.io/badge/Python-Scripting-blue?style=for-the-badge&logo=python&logoColor=white)
+## 📋 Description du Projet
 
-**Conception d'un Jumeau Numérique pour l'automatisation et la validation de réseaux critiques.**
+Ce projet développé durant un stage professionnel permet l'**automatisation complète de la simulation réseau** en utilisant Containerlab. Il combine monitoring temps réel des équipements physiques et génération dynamique de topologies virtuelles pour les tests et la formation.
 
-[Voir l'Architecture](#-architecture-du-pipeline) • [Installation](#-installation--usage) • [Contacter l'auteur](#-contact)
+Le système automatise la découverte de topologies réseau existantes, génère des environnements de simulation fidèles, et permet de tester des scénarios complexes (redondance, failover, changements de configuration) dans un environnement sécurisé et reproductible.
 
-</div>
+## ✨ Fonctionnalités Clés
 
----
+🔍 **Monitoring Automatique**
 
-## ⚠️ Note de Confidentialité
-> Ce projet a été développé dans un cadre professionnel soumis à une clause de confidentialité. Le code source présent dans ce dépôt est une version **"assainie" (sanitized)** : les adresses IP réelles, les mots de passe et les topologies clients spécifiques ont été remplacés par des données génériques pour la démonstration.
+- Surveillance temps réel des switches physiques via SNMP/SSH
+- Détection automatique de la topologie réseau (LLDP)
+- Collecte des configurations et états des équipements
 
----
+🏗️ **Génération de Topologies**
 
-## 📖 Le Problème & La Solution
+- Création automatique de fichiers Containerlab YAML
+- Déploiement d'environnements virtuels identiques au réseau physique
+- Support des protocoles L2/L3 et des VLANs
 
-### ❌ Le Défi
-Dans les infrastructures réseaux traditionnelles, les mises à jour sont risquées. Tester une nouvelle configuration sur du matériel physique est coûteux, lent et peut impacter la production. 
-**Comment valider 100% d'un changement complexe avant même de toucher au premier câble ?**
+🧪 **Tests et Simulation**
 
-### ✅ La Solution : Le Jumeau Numérique
-J'ai développé un pipeline automatisé qui :
-1.  **Scanne** le réseau physique existant.
-2.  **Clone** ce réseau dans un environnement virtuel (Docker/Containerlab).
-3.  **Teste** les changements dans ce monde virtuel sécurisé.
+- Scénarios de test automatisés (spanning-tree, redondance)
+- Simulation de pannes et tests de failover
+- Validation de configurations avant déploiement
 
-**Résultat :** Réduction du temps de déploiement de plusieurs heures à **~5 minutes** et élimination des erreurs humaines.
+📊 **Visualisation**
 
----
+- Génération de diagrammes réseau (Graphviz, Draw.io)
+- Tableaux de bord de monitoring
+- Rapports automatiques d'état
 
-## 🏗️ Architecture du Pipeline
+## 🛠️ Technologies Utilisées
 
-Le système fonctionne en boucle fermée pour garantir que la simulation est toujours fidèle à la réalité.
+| Catégorie                       | Technologies              |
+| -------------------------------- | ------------------------- |
+| **Conteneurisation** | Docker, Containerlab      |
+| **Virtualisation Réseau** | Arista cEOS, Open vSwitch |
+| **Automatisation** | Python 3.8+, Ansible      |
+| **Gestion Réseau** | NAPALM, Netmiko, Paramiko |
+| **Protocoles** | SNMP, SSH, LLDP, STP      |
+| **Configuration** | YAML, Jinja2              |
+| **Visualisation** | Graphviz, Matplotlib      |
+| **Base de Données** | SQLite, JSON              |
+
+## 🏗️ Architecture
 
 ```mermaid
-graph TD
-    subgraph "Monde Physique"
-    A[Switches Physiques] -->|1. Scan LLDP/SNMP| B(Script Python Scanner)
+graph TB
+    A[Switches Physiques] --> B[Scripts de Monitoring]
+    B --> C[Base de Données Local]
+    C --> D[Générateur de Topologie]
+    D --> E[Containerlab YAML]
+    E --> F[Environnement Virtuel]
+    F --> G[Tests Automatisés]
+    G --> H[Rapports & Visualisation]
+  
+    subgraph "Environnement Docker"
+        F
+        I[cEOS Containers]
+        J[Monitoring Tools]
     end
-
-    subgraph "Automatisation & Données"
-    B -->|2. Export Données| C{Netbox / Config}
-    C -->|3. Génération YAML| D[Générateur de Topologie]
-    end
-
-    subgraph "Jumeau Numérique (Virtuel)"
-    D -->|4. Déploiement| E[Containerlab + Docker]
-    E -->|5. Simulation| F[Switches Virtuels (cEOS)]
-    F -->|6. Validation| G[Tests Ansible & Pytest]
-    end
-    
-    G -->|7. Feedback| H[Rapport de Validation]
