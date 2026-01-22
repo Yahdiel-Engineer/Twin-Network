@@ -42,3 +42,13 @@ graph TD
     E -->|Déploiement| F[Environnement Virtuel Docker]
     F -->|Validation| G[Tests Automatisés Ansible/Pytest]
     G -->|Rapport| H[Dashboard Grafana & Logs]
+```
+## 🛠️ Stack Technologique
+
+Domaine,Technologies,Rôle dans le projet
+Orchestration,"Containerlab, Docker",Déploiement des nœuds réseaux légers (conteneurs).
+OS Réseau,"Arista cEOS, Linux (Alpine)",Images virtuelles simulant le comportement réel des routeurs.
+Automatisation,"Python 3.x, Netmiko, NAPALM",Scripts de découverte (Discovery) et logique métier.
+Config Mgmt,Ansible,Déploiement des configurations et compliance testing.
+Source of Truth,Netbox,Inventaire centralisé et modèle de données (IPAM/DCIM).
+Monitoring,"Grafana, Prometheus",Visualisation de l'état de santé du réseau simulé.
