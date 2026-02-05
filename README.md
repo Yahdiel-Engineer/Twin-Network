@@ -12,7 +12,7 @@
 
 ## ⚠️ Avertissement de Confidentialité
 
-Ce projet a été développé dans un cadre professionnel. Le code et les exemples présentés ici sont **assainis et généralisés**. Les données sensibles (IPs internes, topologies propriétaires, credentials) ont été remplacées par des exemples anonymisés.
+Ce projet a été développé dans un cadre professionnel. Le code et les exemples présentés ici sont **nettoyés et généralisés**. Les données sensibles (IPs internes, topologies propriétaires, credentials) ont été remplacées par des exemples anonymisés.
 
 ---
 
