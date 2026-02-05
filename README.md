@@ -5,7 +5,6 @@
 ![Containerlab](https://img.shields.io/badge/Containerlab-Network_Simulation-green?style=for-the-badge)
 ![Arista](https://img.shields.io/badge/Arista-cEOS-red?style=for-the-badge)
 ![YAML](https://img.shields.io/badge/YAML-Configuration-yellow?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 > **Projet d'Ingénierie DevOps & Réseau** : Automatisation complète de la simulation réseau combinant monitoring temps réel et génération dynamique de topologies virtuelles pour tests et formation.
 
